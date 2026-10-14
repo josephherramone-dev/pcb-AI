@@ -1,0 +1,37 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Runtime data (database, storage, job work dirs, copied KiCad libraries)
+backend/data/
+data/
+
+# Node / Next.js
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+frontend/test-results/
+frontend/playwright-report/
+*.tsbuildinfo
+
+# KiCad backups / lock files
+*-backups/
+*.kicad_prl
+~*.lck
+fp-info-cache
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
