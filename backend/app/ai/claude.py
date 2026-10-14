@@ -34,7 +34,7 @@ class ClaudeProvider(LLMProvider):
             )
         if self._client is None:
             self._client = anthropic.Anthropic(api_key=self.settings.anthropic_api_key, max_retries=2,
-                                               timeout=300.0)
+                                               timeout=300.0, base_url=self.settings.anthropic_base_url)
         return self._client
 
     def status(self) -> dict:

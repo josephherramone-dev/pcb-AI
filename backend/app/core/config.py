@@ -55,6 +55,7 @@ class Settings(BaseSettings):
     # --- AI ---------------------------------------------------------------
     ai_provider: Literal["anthropic", "none"] = "anthropic"
     anthropic_api_key: str | None = None
+    anthropic_base_url: str | None = Field(default=None, description="Optional API gateway / proxy base URL.")
     anthropic_model: str = "claude-opus-5-5"
     anthropic_effort: Literal["low", "medium", "high", "xhigh", "max"] = "high"
     anthropic_enable_fallbacks: bool = True

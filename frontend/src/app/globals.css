@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens. Light theme by default, dark theme under .dark on <html>. */
+:root {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --panel-2: #f8f9fb;
+  --hover: #eef0f4;
+  --border: #dfe2e8;
+  --border-strong: #c9ced8;
+  --text: #171a21;
+  --text-muted: #5b6372;
+  --text-faint: #8a92a1;
+  --accent: #2563eb;
+  --accent-soft: #e6eeff;
+  --accent-fg: #ffffff;
+  --ok: #15803d;
+  --ok-soft: #e3f5e9;
+  --warn: #b45309;
+  --warn-soft: #fdf1df;
+  --err: #c2410c;
+  --err-soft: #fde8df;
+  --info-soft: #eef2f7;
+
+  /* schematic canvas */
+  --sch-bg: #fbfbf8;
+  --sch-grid: #e3e3dc;
+  --sch-sheet: #c9c6b8;
+  --sch-body: #8b1d1d;
+  --sch-body-fill: #fff8db;
+  --sch-pin: #8b1d1d;
+  --sch-wire: #1a7f37;
+  --sch-label: #1f2937;
+  --sch-text: #0f4c81;
+  --sch-select: #2563eb;
+
+  /* pcb canvas */
+  --pcb-bg: #10141a;
+  --pcb-board: #1b2a22;
+  --pcb-edge: #e5c07b;
+  --pcb-fcu: #c83434;
+  --pcb-bcu: #3b6fd1;
+  --pcb-pad: #c9a227;
+  --pcb-silk: #e8e8e8;
+  --pcb-crtyd: #d14bd1;
+  --pcb-fab: #8a8f99;
+  --pcb-rats: #a0e0ff;
+  --pcb-select: #ffffff;
+}
+
+.dark {
+  --bg: #0d1016;
+  --panel: #141821;
+  --panel-2: #191e28;
+  --hover: #202634;
+  --border: #262d3b;
+  --border-strong: #343d50;
+  --text: #e6e9ef;
+  --text-muted: #a0a8b8;
+  --text-faint: #6f788a;
+  --accent: #4f8cff;
+  --accent-soft: #1b2a4a;
+  --accent-fg: #ffffff;
+  --ok: #4ade80;
+  --ok-soft: #13291c;
+  --warn: #fbbf24;
+  --warn-soft: #2f2410;
+  --err: #fb7a52;
+  --err-soft: #321a12;
+  --info-soft: #1a2030;
+
+  --sch-bg: #12161d;
+  --sch-grid: #1f2530;
+  --sch-sheet: #3a4252;
+  --sch-body: #e0707a;
+  --sch-body-fill: #1e1a14;
+  --sch-pin: #e0707a;
+  --sch-wire: #4ade80;
+  --sch-label: #e6e9ef;
+  --sch-text: #7fb5ff;
+  --sch-select: #4f8cff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-hover: var(--hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fg: var(--accent-fg);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-err: var(--err);
+  --color-err-soft: var(--err-soft);
+  --color-info-soft: var(--info-soft);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--border);
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.canvas-text {
+  font-family: var(--font-mono);
+  user-select: none;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 1.4s ease-in-out infinite;
+}

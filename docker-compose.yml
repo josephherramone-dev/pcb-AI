@@ -1,0 +1,72 @@
+# Development / single-host deployment of the full stack.
+#   docker compose up --build
+# Frontend: http://localhost:3000   API: http://localhost:8000/docs
+name: pcbai
+
+x-backend: &backend
+  build: ./backend
+  env_file:
+    - path: .env
+      required: false
+  environment:
+    DATABASE_URL: postgresql+psycopg://pcbai:pcbai@postgres:5432/pcbai
+    REDIS_URL: redis://redis:6379/0
+    JOB_BACKEND: celery
+    AUTO_CREATE_TABLES: "false"
+    STORAGE_ROOT: /data/storage
+    KICAD_EXEC_MODE: local
+  volumes:
+    - storage:/data
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: pcbai
+      POSTGRES_PASSWORD: pcbai
+      POSTGRES_DB: pcbai
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pcbai"]
+      interval: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      retries: 20
+
+  api:
+    <<: *backend
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+
+  # EDA worker: runs KiCad jobs as isolated, time-limited subprocesses.
+  worker:
+    <<: *backend
+    command: celery -A app.jobs.celery_app worker --loglevel=INFO --concurrency=2
+    mem_limit: 4g
+    pids_limit: 512
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        BACKEND_URL: http://api:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
+  storage:
