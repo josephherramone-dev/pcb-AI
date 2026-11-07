@@ -181,3 +181,10 @@ def test_ai_destructive_proposal_requires_confirmation(client, library, monkeypa
     url = f"/api/projects/{p['id']}/ai/messages/{msg['id']}/apply"
     assert client.post(url, json={}).status_code == 409
     assert client.post(url, json={"confirm_destructive": True}).status_code == 200
+
+
+def test_legal_endpoint(client):
+    data = client.get("/api/legal").json()
+    assert "without warranty" in data["engineering_disclaimer"]
+    assert "Anthropic" in data["ai_disclosure"]
+    assert {a["license"] for a in data["attributions"]} >= {"GPL-3.0-or-later", "CC-BY-SA-4.0 with design exception"}

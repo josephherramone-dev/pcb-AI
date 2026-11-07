@@ -268,9 +268,24 @@ Results at the end of milestone 1 are recorded in [docs/ROADMAP.md](docs/ROADMAP
 | **3D preview (approximate)** | **Dark theme** |
 | ![3D](docs/screenshots/3d.png) | ![Dark](docs/screenshots/schematic-dark.png) |
 
+## Legal
+
+- **No warranty.** Designs and files produced by this software must be independently
+  verified before manufacturing or use. The disclaimer is shown in the app
+  ("Legal & notices") and included as `NOTICE.txt` in every exported project.
+- **AI assistant:** optional. It uses the official Anthropic API with a server-side key;
+  messages, the design and its check results are sent to Anthropic. The operator must
+  accept Anthropic's Commercial Terms and Usage Policy.
+- **Third-party licenses:** KiCad (GPL-3.0-or-later, run as a separate program), KiCad
+  libraries (CC BY-SA 4.0 with an exception that keeps your designs free), and
+  open-source dependencies. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- **Project license:** not chosen yet. See [docs/legal/LEGAL.md](docs/legal/LEGAL.md)
+  for the options and the full compliance checklist (not legal advice).
+
 ## Further documentation
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — modules, interfaces, data model, decisions
 - [docs/KICAD_INTEGRATION.md](docs/KICAD_INTEGRATION.md) — investigated KiCad capabilities (7.0.11 vs 9.0.9)
 - [docs/AI.md](docs/AI.md) — assistant design, tools, safety rules
 - [docs/ROADMAP.md](docs/ROADMAP.md) — phases, test results, next steps
+- [docs/legal/LEGAL.md](docs/legal/LEGAL.md) — licensing and compliance checklist

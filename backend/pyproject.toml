@@ -15,6 +15,8 @@ dependencies = [
   "redis>=5,<9",
   "anthropic>=1.13,<2",
   "python-multipart>=0.0.20",
+  # Transitive (TLS CA bundle); pinned to a release without known advisories (PYSEC-2026-4320).
+  "certifi>=2026.10.18",
 ]
 
 [project.optional-dependencies]

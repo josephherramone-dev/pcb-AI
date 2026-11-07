@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DeleteProjectDialog, RenameProjectDialog } from "@/components/dashboard/project-dialogs";
 import { useCapabilities } from "@/components/engine-status";
+import { LegalLink } from "@/components/legal-dialog";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button, EmptyState, Kbd, Spinner, Tip } from "@/components/ui/primitives";
@@ -307,6 +308,7 @@ function StatusBar({ selection, activeJob }: { selection: ReturnType<typeof useE
       <div className="flex-1" />
       {selection && <span>selected: {selection.kind === "component" ? selection.ref : selection.kind === "pin" ? `${selection.ref}.${selection.pin}` : selection.kind === "net" ? `net ${selection.name}` : selection.kind}</span>}
       {cursor && <span className="font-mono">x {cursor.x.toFixed(2)} y {cursor.y.toFixed(2)} mm</span>}
+      <LegalLink />
     </footer>
   );
 }

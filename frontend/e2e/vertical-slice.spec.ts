@@ -70,3 +70,12 @@ test("dashboard rename and delete with confirmation", async ({ page }) => {
   await page.getByTestId("confirm-delete").click();
   await expect(page.getByTestId("project-card").filter({ hasText: name })).toHaveCount(0);
 });
+
+test("legal notices are reachable", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("legal-link").click();
+  const content = page.getByTestId("legal-content");
+  await expect(content).toContainText("without warranty");
+  await expect(content).toContainText("Anthropic");
+  await expect(content).toContainText("CC BY-SA 4.0");
+});

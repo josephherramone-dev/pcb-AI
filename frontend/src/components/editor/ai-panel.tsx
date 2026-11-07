@@ -128,7 +128,7 @@ export function AiPanel({ pid }: { pid: string }) {
             {!send.isPending && <Send className="h-3.5 w-3.5" />}
           </Button>
         </div>
-        <div className="mt-1 px-1 text-[10.5px] text-faint">AI output can be wrong. Proposals are validated against the KiCad libraries, not verified electrically.</div>
+        <div className="mt-1 px-1 text-[10.5px] text-faint">AI (Claude by Anthropic): your messages, the design and its check results are sent to Anthropic to generate answers. Output can be wrong; proposals are checked against the KiCad libraries, not verified electrically.</div>
       </div>
     </aside>
   );

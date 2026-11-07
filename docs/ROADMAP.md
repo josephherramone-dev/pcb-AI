@@ -23,12 +23,13 @@
 
 | Suite | Environment | Result |
 |---|---|---|
-| Backend unit + API + KiCad integration (`pytest`) | KiCad 7.0.11 local, SQLite | 48 passed, 1 skipped (ERC negative test: ERC unavailable on 7.0) |
-| Same | KiCad 9.0.9 Docker runner, SQLite | 49 passed |
-| Same | KiCad 7.0.11 local, PostgreSQL 16 | 48 passed, 1 skipped |
+| Backend unit + API + KiCad integration (`pytest`) | KiCad 7.0.11 local, SQLite | 49 passed, 1 skipped (ERC negative test: ERC unavailable on 7.0) |
+| Same | KiCad 9.0.9 Docker runner, SQLite | 50 passed |
+| Same | KiCad 7.0.11 local, PostgreSQL 16 | 48 passed, 1 skipped (before the legal endpoint test was added) |
 | `ruff check` | — | clean |
 | Frontend `tsc`, `eslint`, `vitest` (12 tests), `next build` | Node 22 | clean / passed |
-| Playwright e2e (4 tests: vertical slice, dashboard CRUD, schematic editing + undo/redo, PCB routing) | dev servers, KiCad 9 Docker runner | 4 passed |
+| Playwright e2e (5 tests: vertical slice, dashboard CRUD, schematic editing + undo/redo, PCB routing, legal notices) | dev servers, KiCad 9 Docker runner | 5 passed |
+| `npm audit --omit=dev`, `pip-audit` | after upgrading Next.js to 16.4.5 and pinning certifi | 0 known vulnerabilities |
 | Same e2e suite | full Docker Compose stack (Postgres, Redis, Celery worker, KiCad 9 in container) | 4 passed |
 | Backend image with Alembic on PostgreSQL + in-container KiCad validation | Docker | passed |
 

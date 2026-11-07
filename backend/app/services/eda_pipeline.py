@@ -23,6 +23,7 @@ from app.core.config import get_settings
 from app.db.models import Artifact, CheckRecord, Job, Project, Revision
 from app.design.model import DesignDocument
 from app.kicad.engine import CheckResult, KiCadEngine, project_slug
+from app.legal import export_notice
 from app.library.service import get_library_service
 from app.services.validation import validation_status
 from app.storage.base import get_storage
@@ -116,7 +117,8 @@ def run_pipeline(db: Session, job: Job) -> dict:
             for kind, rel in exp.files.items():
                 artifacts.append(_store(db, job, rev, workdir, rel, kind).id)
 
-        rel = engine.package_project(slug, workdir)
+        notice = export_notice(project.name, rev.number, statuses, caps.get("kicad_version"))
+        rel = engine.package_project(slug, workdir, notice)
         artifacts.append(_store(db, job, rev, workdir, rel, "kicad_project").id)
         db.commit()
         return _finish(db, rev, statuses, artifacts)

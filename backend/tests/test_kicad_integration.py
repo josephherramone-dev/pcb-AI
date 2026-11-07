@@ -122,6 +122,8 @@ def test_export_and_download(client, kicad_caps):
     names = zf.namelist()
     for ext in (".kicad_pro", ".kicad_sch", ".kicad_pcb"):
         assert any(n.endswith(ext) for n in names), names
+    notice = zf.read(next(n for n in names if n.endswith("NOTICE.txt"))).decode()
+    assert "NO WARRANTY" in notice and "CC BY-SA 4.0" in notice and "netlist_match: passed" in notice
     sch = zf.read(next(n for n in names if n.endswith(".kicad_sch"))).decode()
     assert sch.startswith("(kicad_sch") and "Timer:NE555P" in sch
 

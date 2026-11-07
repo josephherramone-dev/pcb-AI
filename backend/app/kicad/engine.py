@@ -325,10 +325,12 @@ class KiCadEngine(EdaEngine):
         return ExportResult("passed", f"exported {len(produced)} Gerber/drill file(s)" +
                             (" and BOM" if "bom_csv" in files else ""), files=files, log="\n".join(logs))
 
-    def package_project(self, slug: str, workdir: Path) -> str:
+    def package_project(self, slug: str, workdir: Path, notice: str | None = None) -> str:
         zpath = workdir / "exports" / f"{slug}-kicad.zip"
         zpath.parent.mkdir(parents=True, exist_ok=True)
         with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as zf:
+            if notice:
+                zf.writestr(f"{slug}/NOTICE.txt", notice)
             for name in (f"{slug}.kicad_pro", f"{slug}.kicad_sch", f"{slug}.kicad_pcb", "fp-lib-table",
                          "sym-lib-table"):
                 p = workdir / name

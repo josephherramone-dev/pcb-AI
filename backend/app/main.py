@@ -12,6 +12,7 @@ from app.ai.orchestrator import get_provider
 from app.api import ai, library, projects
 from app.core.config import get_settings
 from app.db.session import init_db
+from app.legal import legal_info
 from app.library.service import get_library_service
 from app.services.eda_pipeline import get_eda_engine
 
@@ -43,6 +44,11 @@ app.include_router(ai.router)
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+
+@app.get("/api/legal")
+def legal():
+    return legal_info()
 
 
 @app.get("/api/system/capabilities")

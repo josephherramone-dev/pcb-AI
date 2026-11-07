@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { CreateProjectDialog, DeleteProjectDialog, RenameProjectDialog } from "@/components/dashboard/project-dialogs";
 import { EngineStatusPanel } from "@/components/engine-status";
+import { LegalLink } from "@/components/legal-dialog";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button, EmptyState, Spinner } from "@/components/ui/primitives";
@@ -102,6 +103,11 @@ export default function DashboardPage() {
           </div>
         </aside>
       </main>
+
+      <footer className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-1 px-4 pb-6 text-[11px] text-faint">
+        <span>Designs are provided without warranty and must be independently verified before manufacturing.</span>
+        <LegalLink />
+      </footer>
 
       <CreateProjectDialog open={createOpen} onOpenChange={setCreateOpen} />
       {renaming && <RenameProjectDialog key={renaming.id} project={renaming} onClose={() => setRenaming(null)} />}
